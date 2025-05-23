@@ -1,7 +1,7 @@
 <?php
 $dsn = 'mysql:host=localhost;dbname=event_scoring';
 $username = 'root';
-$password = '';
+$password = 'newpassword';
 
 try {
     $pdo = new PDO($dsn, $username, $password);

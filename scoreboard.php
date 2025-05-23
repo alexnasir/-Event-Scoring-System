@@ -33,6 +33,7 @@ if (isset($_GET['ajax'])) {
     <meta charset="UTF-8">
     <title>Public Scoreboard</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function updateScoreboard() {

@@ -1,48 +1,285 @@
+/* Reset default browser styles for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base styles for the body */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f7fa;
+    padding: 20px;
 }
 
+/* Headings for consistent typography */
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1a3c6d;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Container for centering content */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form group for input and error/success messages */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Form styling */
 form {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-input, button {
-    margin: 5px;
+label {
+    font-weight: 500;
+    color: #1a3c6d;
+    margin-bottom: 0.25rem;
 }
 
+input[type="text"],
+input[type="number"] {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Button styling */
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Delete button styling */
+.delete-btn {
+    background-color: #b91c1c;
+    margin-top: 0.5rem;
+}
+
+.delete-btn:hover {
+    background-color: #991b1b;
+}
+
+/* Delete form styling */
+.delete-form {
+    margin-bottom: 0;
+}
+
+/* Feedback messages */
 .message {
-    color: green;
-    font-weight: bold;
+    color: #15803d;
+    background-color: #dcfce7;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.message i {
+    font-size: 1rem;
 }
 
 .error {
-    color: blue;
-    font-weight: bold;
+    color: #b91c1c;
+    background-color: #fee2e2;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
 }
 
+.error i {
+    font-size: 1rem;
+}
+
+/* Logout link */
 .logout {
-    margin-top: 10px;
+    display: inline-block;
+    margin: 1rem 0;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.logout:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* Navigation list (index.php) */
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+ul li a {
     display: block;
+    padding: 0.75rem;
+    background-color: #e5e7eb;
+    color: #1a3c6d;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+ul li a:hover {
+    background-color: #d1d5db;
+}
+
+/* Scoreboard styling */
+#scoreboard {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 ol {
     list-style-type: none;
+    counter-reset: rank;
 }
 
 li {
-    padding: 5px;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
 }
 
+li::before {
+    counter-increment: rank;
+    content: counter(rank) ".";
+    margin-right: 1rem;
+    font-weight: 600;
+    color: #1a3c6d;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+/* Medal colors for scoreboard */
 .gold {
-    color: gold;
-    font-weight: bold;
+    color: #d97706;
+    font-weight: 600;
 }
 
 .silver {
-    color: silver;
+    color: #6b7280;
+    font-weight: 500;
 }
 
 .bronze {
-    color: #cd7f32;
+    color: #b45309;
+    font-weight: 500;
+}
+
+/* Card layout for judge.php */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #1a3c6d;
+}
+
+.card form {
+    margin-bottom: 0;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button {
+        font-size: 0.9rem;
+    }
+
+    form {
+        gap: 0.75rem;
+    }
+
+    .card-container {
+        grid-template-columns: 1fr;
+    }
 }

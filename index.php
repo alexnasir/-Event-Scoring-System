@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Event Scoring System</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Welcome to the Event Scoring System</h1>
