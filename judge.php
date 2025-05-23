@@ -241,13 +241,12 @@ if (!isset($_SESSION['judge_id'])) {
                     $('#delete-toast').fadeOut();
                 });
 
-                // Add timeout for messages
                 function setMessageTimeout() {
                     $('.message, .error').each(function() {
                         if ($(this).is(':visible')) {
                             setTimeout(() => {
                                 $(this).fadeOut(500);
-                            }, 3000); // 5 seconds timeout
+                            }, 3000); 
                         }
                     });
                 }
@@ -255,7 +254,7 @@ if (!isset($_SESSION['judge_id'])) {
                 // Run on page load and after form submissions
                 setMessageTimeout();
                 $('.score-form, .delete-form').on('submit', function() {
-                    setTimeout(setMessageTimeout, 100); // Check again after submission
+                    setTimeout(setMessageTimeout, 100); 
                 });
 
                 $('.navbar-toggle').on('click', function() {
