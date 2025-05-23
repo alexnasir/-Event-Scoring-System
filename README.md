@@ -100,6 +100,16 @@ Judges can log out from any page (if logged in) via the navbar, redirecting to `
 - Points must be numerical and between 1 and 100.
 - The scoreboard highlights top scorers with "gold," "silver," and "bronze" styling for the top three users based on average scores.
 
+## FUTURE PLANS
+
+if given more time would implement:
+   ### Role based application: admin, Judge and Users
+ - Automated Score Validation: Implement rules-based score validation with admin approval for flagged scores.
+ - Real-Time Collaboration Tools: Add WebSocket for real-time judge collaboration with a chat interface.
+ -Score Analytics Dashboard:  Build an admin dashboard for score analytics with exportable reports (PDF/CSV).
+ - Event Notifications:  Add email/SMS notifications for judges and admins with opt-in settings.
+
+
 ## Design Choices
 
 ### Database Structure
