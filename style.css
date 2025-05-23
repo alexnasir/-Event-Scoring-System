@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input, button {
+    margin: 5px;
+}
+
+.message {
+    color: green;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.logout {
+    margin-top: 10px;
+    display: block;
+}
+
+ol {
+    list-style-type: none;
+}
+
+li {
+    padding: 5px;
+}
+
+.gold {
+    color: gold;
+    font-weight: bold;
+}
+
+.silver {
+    color: silver;
+}
+
+.bronze {
+    color: #cd7f32;
+}
