@@ -11,7 +11,6 @@ body {
     background-color: #ffe4e1; /* Peach background */
 }
 
-/* Navbar styling */
 .navbar {
     background-color: #000; 
     padding: 1rem 2rem;
@@ -114,7 +113,6 @@ body {
     transform: translateY(-3px);
 }
 
-/* Features section */
 .features {
     padding: 3rem 2rem;
     text-align: center;
@@ -184,6 +182,7 @@ body {
     background-color: #e65c00;
     transform: translateY(-3px);
 }
+
 .footer {
     text-align: center;
     padding: 1.5rem;
@@ -276,7 +275,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -287,6 +286,7 @@ body {
     align-items: center;
 }
 
+/* Form group for input and error/success messages */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -296,7 +296,6 @@ body {
     margin-bottom: 1rem;
 }
 
-/* Form styling */
 form {
     display: flex;
     flex-direction: column;
@@ -329,6 +328,7 @@ input[type="number"]:focus {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
+/* Button styling */
 button {
     padding: 0.75rem 1.5rem;
     background-color: #2563eb;
@@ -352,7 +352,6 @@ button:active {
     transform: translateY(0);
 }
 
-/* Delete button styling */
 .delete-btn {
     background-color: #b91c1c;
     margin-top: 0.5rem;
@@ -404,7 +403,6 @@ button:active {
     font-size: 1rem;
 }
 
-/* Logout link */
 .logout {
     display: inline-block;
     margin: 1rem 0;
@@ -419,12 +417,63 @@ button:active {
     text-decoration: underline;
 }
 
-/* Scoreboard styling */
 #scoreboard {
-    background-color: #fff;
+    width: 100%;
     padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.scoreboard-card {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.scoreboard-card h2 {
+    font-size: 1.5rem;
+    color: #1a3c6d;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.chart-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.chart-card h2 {
+    font-size: 1.5rem;
+    color: #1a3c6d;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.chart-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.chart-controls label {
+    font-size: 1rem;
+    color: #1a3c6d;
+}
+
+.chart-controls select {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.chart-controls select:focus {
+    outline: none;
+    border-color: #2563eb;
 }
 
 ol {
@@ -469,9 +518,10 @@ li:last-child {
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-top: 1.5rem;
+    width: 100%;
 }
 
 .card {
@@ -597,7 +647,7 @@ li:last-child {
 
     .container .form-group,
     .container form {
-        max-width: 100%; /* Full width on mobile */
+        max-width: 100%; 
     }
 
     .card .form-group {
@@ -617,5 +667,15 @@ li:last-child {
     #cancel-delete {
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
+    }
+
+    .chart-card,
+    .scoreboard-card {
+        max-width: 100%;
+    }
+
+    .chart-controls {
+        flex-direction: column;
+        gap: 0.25rem;
     }
 }
