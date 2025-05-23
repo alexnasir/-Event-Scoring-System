@@ -1,28 +1,18 @@
 <?php
+session_start();
 include 'db.php';
 
-if (isset($_GET['ajax'])) {
-    try {
-        $stmt = $pdo->query("SELECT u.id, u.name, COALESCE(SUM(s.points), 0) as total_points 
-                             FROM users u 
-                             LEFT JOIN scores s ON u.id = s.user_id 
-                             GROUP BY u.id, u.name 
-                             ORDER BY total_points DESC");
-        $rankings = $stmt->fetchAll();
-        echo "<ol>";
-        $rank = 1;
-        foreach ($rankings as $user) {
-            $class = '';
-            if ($rank == 1) $class = 'gold';
-            elseif ($rank == 2) $class = 'silver';
-            elseif ($rank == 3) $class = 'bronze';
-            echo "<li class='$class'>" . htmlspecialchars($user['name']) . " - " . $user['total_points'] . " points</li>";
-            $rank++;
-        }
-        echo "</ol>";
-    } catch (PDOException $e) {
-        echo '<p class="error">Database error: ' . $e->getMessage() . '</p>';
-    }
+try {
+    $stmt = $pdo->query("
+        SELECT u.name, AVG(s.points) as average_score
+        FROM users u
+        LEFT JOIN scores s ON u.id = s.user_id
+        GROUP BY u.id, u.name
+        ORDER BY average_score DESC
+    ");
+    $scores = $stmt->fetchAll();
+} catch (PDOException $e) {
+    echo '<p class="error">Database error: ' . $e->getMessage() . '</p>';
     exit;
 }
 ?>
@@ -31,28 +21,55 @@ if (isset($_GET['ajax'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Public Scoreboard</title>
+    <title>Scoreboard</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function updateScoreboard() {
-            $.get("scoreboard.php?ajax=1", function(data) {
-                if (data.includes("Database error")) {
-                    $("#scoreboard").html("<p class='error'>Error loading scoreboard.</p>");
-                } else {
-                    $("#scoreboard").html(data);
-                }
-            });
-        }
-        setInterval(updateScoreboard, 10000);
-        $(document).ready(function() {
-            updateScoreboard();
-        });
-    </script>
 </head>
 <body>
-    <h1>Public Scoreboard</h1>
-    <div id="scoreboard"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">Event Scoring System</div>
+        <button class="navbar-toggle"><i class="fas fa-bars"></i></button>
+        <ul class="navbar-menu">
+            <div class="nav-item"><a href="index.php">Home</a></div>
+            <div class="nav-item"><a href="admin.php">Admin Panel</a></div>
+            <div class="nav-item"><a href="judge.php">Judge Portal</a></div>
+            <div class="nav-item"><a href="scoreboard.php" class="active">Scoreboard</a></div>
+            <?php if (isset($_SESSION['judge_id'])): ?>
+                <div class="nav-item"><a href="logout.php" class="logout">Logout</a></div>
+            <?php endif; ?>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Scoreboard</h1>
+        <div id="scoreboard">
+            <ol>
+                <?php foreach ($scores as $index => $score): ?>
+                    <li class="<?php echo $index == 0 ? 'gold' : ($index == 1 ? 'silver' : ($index == 2 ? 'bronze' : '')); ?>">
+                        <?php echo htmlspecialchars($score['name']) . ': ' . number_format($score['average_score'], 2); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            function updateScoreboard() {
+                $.ajax({
+                    url: 'scoreboard.php',
+                    method: 'GET',
+                    success: function(data) {
+                        $('#scoreboard').html($(data).find('#scoreboard').html());
+                    }
+                });
+            }
+            setInterval(updateScoreboard, 5000);
+
+            $('.navbar-toggle').on('click', function() {
+                $('.navbar-menu').toggleClass('active');
+            });
+        });
+    </script>
 </body>
 </html>
