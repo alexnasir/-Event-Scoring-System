@@ -21,7 +21,10 @@ session_start();
             <div class="nav-item"><a href="admin.php">Admin Panel</a></div>
             <div class="nav-item"><a href="judge.php">Judge Portal</a></div>
             <div class="nav-item"><a href="scoreboard.php">Scoreboard</a></div>
-            <?php if (isset($_SESSION['judge_id'])): ?>
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                <div class="nav-item"><a href="signup.php">Sign Up</a></div>
+                <div class="nav-item"><a href="login.php">Login</a></div>
+            <?php else: ?>
                 <div class="nav-item"><a href="logout.php" class="logout">Logout</a></div>
             <?php endif; ?>
         </ul>
@@ -31,7 +34,7 @@ session_start();
         <div class="hero-content">
             <h1>Welcome to Event Scoring System</h1>
             <p class="subtitle">Your One-stop Event Scheduling Platform!</p>
-            <a href="#" class="cta-button">Get Started</a>
+            <a href="signup.php" class="cta-button">Get Started</a>
         </div>
     </header>
 
