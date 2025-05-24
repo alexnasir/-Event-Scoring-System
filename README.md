@@ -161,6 +161,6 @@ if given more time would implement:
 
 ## Publicly Accessible Link
 
-This is a local development project hosted on GitHub for review: https://github.com/alexnasir/-Event-Scoring-System.git.To preview locally, follow the setup instructions above. For a live demo: 
+This is a local development project hosted on GitHub for review: https://github.com/alexnasir/-Event-Scoring-System.git.To preview locally, follow the setup instructions above. For a live demo: https://eventscoringsystem.wuaze.com/
 
 
