@@ -41,40 +41,140 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Login</h1>
-        <form method="post" id="login-form">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
-                <p class="error" style="display: none;"></p>
-                <?php if (isset($errors['email'])): ?>
-                    <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['email']; ?></p>
+<body class="form-page">
+  <div class="sidebar">
+        <div class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="sidebar-menu">
+        <li class="sidebar-item">
+                <a href="/dashboard.php" class="active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="sidebar-label">Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/index.php">
+                    <i class="fas fa-home"></i>
+                    <span class="sidebar-label">Home</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/admin.php">
+                    <i class="fas fa-user-shield"></i>
+                    <span class="sidebar-label">Admin Panel</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/judge.php">
+                    <i class="fas fa-gavel"></i>
+                    <span class="sidebar-label">Judge Portal</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/scoreboard.php">
+                    <i class="fas fa-trophy"></i>
+                    <span class="sidebar-label">Scoreboard</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/about.php">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="sidebar-label">About</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/contact.php">
+                    <i class="fas fa-envelope"></i>
+                    <span class="sidebar-label">Contact</span>
+                </a>
+            </li>
+    
+            <li class="sidebar-item">
+                <a href="/generate_report.php">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="sidebar-label">Generate Report</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#">
+                    <i class="fas fa-cog"></i>
+                    <span class="sidebar-label">Settings</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#">
+                    <i class="fas fa-bell"></i>
+                    <span class="sidebar-label">Notification</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/history.php">
+                    <i class="fas fa-history"></i>
+                    <span class="sidebar-label">History</span>
+                </a>
+            </li>
+            
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                <li class="sidebar-item">
+                    <a href="signup.php">
+                        <i class="fas fa-user-plus"></i>
+                        <span class="sidebar-label">Signup</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="login.php">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span class="sidebar-label">Login</span>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="sidebar-item">
+                    <a href="logout.php">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="sidebar-label">Logout</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+        <div class="container form-container">
+            <h1>Login</h1>
+            <form method="post" id="login-form" class="modern-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                    <p class="error" style="display: none;"></p>
+                    <?php if (isset($errors['email'])): ?>
+                        <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['email']; ?></p>
+                    <?php endif; ?>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password">
+                    <p class="error" style="display: none;"></p>
+                    <?php if (isset($errors['password'])): ?>
+                        <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['password']; ?></p>
+                    <?php endif; ?>
+                </div>
+                <button type="submit" class="gradient-btn">Login</button>
+                <?php if (isset($_SESSION['signup_message'])): ?>
+                    <p class="message"><i class="fas fa-check-circle"></i> <?php echo $_SESSION['signup_message']; unset($_SESSION['signup_message']); ?></p>
                 <?php endif; ?>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password">
-                <p class="error" style="display: none;"></p>
-                <?php if (isset($errors['password'])): ?>
-                    <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['password']; ?></p>
+                <?php if ($success_message): ?>
+                    <p class="message"><i class="fas fa-check-circle"></i> <?php echo $success_message; ?></p>
                 <?php endif; ?>
+                <?php if (isset($errors['general'])): ?>
+                    <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['general']; ?></p>
+                <?php endif; ?>
+            </form>
+            <div class="form-links">
+                <a href="signup.php">Don't have an account? Sign Up</a>
             </div>
-            <button type="submit">Login</button>
-            <?php if (isset($_SESSION['signup_message'])): ?>
-                <p class="message"><i class="fas fa-check-circle"></i> <?php echo $_SESSION['signup_message']; unset($_SESSION['signup_message']); ?></p>
-            <?php endif; ?>
-            <?php if ($success_message): ?>
-                <p class="message"><i class="fas fa-check-circle"></i> <?php echo $success_message; ?></p>
-            <?php endif; ?>
-            <?php if (isset($errors['general'])): ?>
-                <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['general']; ?></p>
-            <?php endif; ?>
-        </form>
-        <a href="signup.php" class="logout">Don't have an account? Sign Up</a>
+        </div>
     </div>
     <script>
         $(document).ready(function() {
@@ -101,6 +201,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $('#email, #password').on('input', function() {
                     $(this).next('.error').hide();
                 });
+            });
+
+            $('.sidebar-toggle').on('click', function() {
+                $('.sidebar').toggleClass('collapsed');
+            });
+
+            if ($(window).width() <= 768) {
+                $('.sidebar').addClass('collapsed');
+            }
+
+            $(window).resize(function() {
+                if ($(window).width() <= 768) {
+                    $('.sidebar').addClass('collapsed');
+                } else {
+                    $('.sidebar').removeClass('collapsed');
+                }
             });
         });
     </script>

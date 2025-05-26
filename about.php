@@ -1,55 +1,22 @@
 <?php
-include 'db.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$errors = [];
-$success_message = '';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $judge_id = trim($_POST['judge_id']);
-    $display_name = trim($_POST['display_name']);
-    
-    if (empty($judge_id)) {
-        $errors['judge_id'] = 'Judge ID is required.';
-    } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $judge_id)) {
-        $errors['judge_id'] = 'Judge ID must be alphanumeric.';
-    }
-    
-    if (empty($display_name)) {
-        $errors['display_name'] = 'Display name is required.';
-    } elseif (!preg_match('/^[a-zA-Z ]+$/', $display_name)) {
-        $errors['display_name'] = 'Display name must contain only letters and spaces.';
-    }
-    
-    if (empty($errors)) {
-        try {
-            $stmt = $pdo->prepare("SELECT COUNT(*) FROM judges WHERE id = ?");
-            $stmt->execute([$judge_id]);
-            if ($stmt->fetchColumn() > 0) {
-                $errors['judge_id'] = 'Judge ID already exists.';
-            } else {
-                $stmt = $pdo->prepare("INSERT INTO judges (id, display_name) VALUES (?, ?)");
-                $stmt->execute([$judge_id, $display_name]);
-                $success_message = 'Judge ' . htmlspecialchars($display_name) . ' added successfully.';
-            }
-        } catch (PDOException $e) {
-            $errors['general'] = 'Database error: ' . $e->getMessage();
-        }
-    }
-}
+session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Panel</title>
+    <title>About Us</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body class="form-page">
-<div class="sidebar">
+<body>
+< <div class="sidebar">
         <div class="sidebar-toggle">
             <i class="fas fa-bars"></i>
         </div>
@@ -146,69 +113,65 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </ul>
     </div>
     <div class="main-content">
-        <div class="container form-container">
-            <h1>Admin Panel</h1>
-            <form method="post" id="add-judge-form" class="modern-form">
-                <div class="form-group">
-                    <label for="judge_id">Judge ID</label>
-                    <input type="text" name="judge_id" id="judge_id" value="<?php echo isset($_POST['judge_id']) ? htmlspecialchars($_POST['judge_id']) : ''; ?>">
-                    <p class="error" style="display: none;"></p>
-                    <?php if (isset($errors['judge_id'])): ?>
-                        <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['judge_id']; ?></p>
-                    <?php endif; ?>
+        <div class="container">
+            <h1>About the Event Scoring System</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Overview</h2>
+                    <p>Hi, I’m Alex, an aspiring full-stack developer! The Event Scoring System has become my passion project, designed to simplify the process of managing scores for events like competitions and talent shows. I recently started working on this project, and I’m excited to build a tool that’s both efficient and user-friendly.</p>
                 </div>
-                <div class="form-group">
-                    <label for="display_name">Display Name</label>
-                    <input type="text" name="display_name" id="display_name" value="<?php echo isset($_POST['display_name']) ? htmlspecialchars($_POST['display_name']) : ''; ?>">
-                    <p class="error" style="display: none;"></p>
-                    <?php if (isset($errors['display_name'])): ?>
-                        <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['display_name']; ?></p>
-                    <?php endif; ?>
+                <div class="card">
+                    <h2>Project Journey</h2>
+                    <p>I have began developing the Event Scoring System using XAMPP, JavaScript, CSS, and PHP. As of for now, I’m still in the early stages, gathering ideas and information to make this project more digitized and impactful. My goal is to create real-world solutions that make event scoring seamless for judges, admins, and participants.</p>
                 </div>
-                <button type="submit" class="gradient-btn">Add Judge</button>
-                <?php if ($success_message): ?>
-                    <p class="message"><i class="fas fa-check-circle"></i> <?php echo $success_message; ?></p>
-                <?php endif; ?>
-                <?php if (isset($errors['general'])): ?>
-                    <p class="error"><i class="fas fa-exclamation-circle"></i> <?php echo $errors['general']; ?></p>
-                <?php endif; ?>
-            </form>
+                <div class="card">
+                    <h2>My Skills</h2>
+                    <p>I’m proficient in a variety of languages and frameworks that I plan to integrate into this project as it grows:</p>
+                    <ul>
+                        <li><strong>JavaScript:</strong> For dynamic and interactive features.</li>
+                        <li><strong>CSS:</strong> To style the application with clean and responsive designs.</li>
+                        <li><strong>PHP:</strong> For server-side logic and database interactions.</li>
+                        <li><strong>React-Next.js Auth:</strong> For secure authentication using NextAuth.js, API routes, middleware, and Prisma integration.</li>
+                        <li><strong>Tailwind:</strong> To streamline styling with utility-first CSS.</li>
+                        <li><strong>TypeScript:</strong> For type-safe JavaScript development.</li>
+                        <li><strong>Node.js:</strong> To build scalable backend services in the future.</li>
+                        <li><strong>Flask & Python:</strong> For additional backend capabilities and scripting.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2>Future Plans</h2>
+                    <p>Role-Based Access Control: Implement separate dashboards and permissions for Admin, Judge, and User roles.</p>
+
+                    <p>Automated Score Validation: Implement rules-based score validation with admin approval for flagged scores.</p>
+<p>Real-Time Collaboration Tools: Add WebSocket for real-time judge collaboration with a chat interface.</p>
+<p>Score Analytics Dashboard: Build an admin dashboard for score analytics with exportable reports (PDF/CSV).</p>
+<p>Event Notifications: Add email/SMS notifications for judges and admins with opt-in settings.</p>
+<p>Mobile Friendly: Ensure responsive design for seamless access on all devices, including phones and tablets.</p>
+
+                    <p>My vision is to make the Event Scoring System a go-to tool for event organizers worldwide, with a focus on digitization and real-world usability. Stay tuned for updates!</p>
+                </div>
+            </div>
         </div>
     </div>
     <script>
         $(document).ready(function() {
-            $('#add-judge-form').on('submit', function(e) {
-                $('.error').hide();
-                let hasError = false;
-                const judgeId = $('#judge_id').val().trim();
-                const displayName = $('#display_name').val().trim();
-                if (!judgeId) {
-                    $('#judge_id').next('.error').text('Judge ID is required.').show();
-                    hasError = true;
-                }
-                if (!displayName) {
-                    $('#display_name').next('.error').text('Display name is required.').show();
-                    hasError = true;
-                }
-                if (hasError) e.preventDefault();
-                $('#judge_id, #display_name').on('input', function() {
-                    $(this).next('.error').hide();
-                });
-            });
-
             $('.sidebar-toggle').on('click', function() {
                 $('.sidebar').toggleClass('collapsed');
+                $('.main-content').toggleClass('collapsed');
             });
 
             if ($(window).width() <= 768) {
                 $('.sidebar').addClass('collapsed');
+                $('.main-content').addClass('collapsed');
             }
 
             $(window).resize(function() {
                 if ($(window).width() <= 768) {
                     $('.sidebar').addClass('collapsed');
+                    $('.main-content').addClass('collapsed');
                 } else {
                     $('.sidebar').removeClass('collapsed');
+                    $('.main-content').removeClass('collapsed');
                 }
             });
         });
