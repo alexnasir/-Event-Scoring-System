@@ -157,7 +157,7 @@ if (isset($_GET['download_pdf'])) {
 
         .sidebar {
             width: 250px;
-            background: #1a3c6d;
+            background: #333;
             color: #fff;
             height: 100vh;
             position: fixed;
@@ -192,7 +192,7 @@ if (isset($_GET['download_pdf'])) {
         }
 
         .sidebar-item a:hover {
-            background: #2563eb;
+            background:  #6200ea;
         }
 
         .sidebar-label {
