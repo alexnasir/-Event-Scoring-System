@@ -5,6 +5,109 @@ body {
     background: #f4f4f4;
 }
 
+/* Navbar */
+.navbar {
+    background: #333;
+    color: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand a {
+    color: aqua;
+    font-size: 1.5em;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navbar-toggle {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #fff;
+    display: none;
+}
+
+.navbar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-item {
+    margin-left: 20px;
+}
+
+.navbar-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 8px 15px;
+    transition: background 0.3s ease;
+}
+
+.navbar-item a:hover {
+    background: linear-gradient(45deg, #6200ea, #b388ff);
+    border-radius: 8px;
+}
+
+/* Adjust sidebar and main-content for navbar */
+.sidebar {
+    top: 50px;
+    height: calc(100vh - 10px);
+}
+
+.main-content {
+    margin-top: 60px;
+}
+
+.main-content.collapsed {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+}
+
+/* About Section */
+.about-section {
+    background: linear-gradient(45deg, #6200ea, #b388ff);
+    padding: 40px 20px;
+    margin: 20px 0;
+    color: #000;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.about-section h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* Contact Section */
+.contact-section {
+    background: linear-gradient(45deg, #333, #1baac4);
+    padding: 40px 20px;
+    margin: 20px 0;
+    color: #000;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+
 .form-page {
     background: linear-gradient(45deg, #e0f7fa, #f3e5f5);
     min-height: 100%;
@@ -895,4 +998,55 @@ h1 {
     .features h2 {
         font-size: 24px;
     }
+}
+
+.navbar-toggle {
+    display: block;
+    position: absolute;
+    right: 60px;
+    top: 15px;
+}
+
+.navbar-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    margin-right: 30px;
+    right: 0;
+    background: #333;
+    flex-direction: column;
+    /* width: 200px;
+    padding: 10px; */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.navbar-menu.active {
+    display: flex;
+}
+
+.navbar-item {
+    margin: 10px 0;
+    text-align: center;
+}
+
+
+@media (min-width: 769px) {
+.navbar-menu {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    margin-right: 30px;
+    box-shadow: none;
+    right: -1px;
+    top: 1px;
+
+
+
+
+}
+
+.navbar-toggle {
+    display: none;
+}
 }
